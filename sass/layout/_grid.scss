@@ -1,0 +1,60 @@
+.row {
+  // start by defining a width for the grid row
+  // width: 1140px; ==> a standard practice used today (but should use rem for responsive)
+  max-width: $grid-width;
+  background-color: #ccc;
+  // center row in viewport
+  margin: 0 auto; // ==> trick used to center block elements inside other block elements
+  
+  &:not(:last-child) {
+    // this margin-bottom applies to all rows except the last-child!
+    margin-bottom: $gutter-vertical;
+  }
+
+  @include clearfix;
+
+  [class^="col-"] {
+    background-color: orangered;
+    float: left;
+
+    &:not(:last-child) {
+      margin-right: $gutter-horizontal;
+    }
+  }
+
+  .col-1-of-2 {
+    width: calc((100% - #{$gutter-horizontal}) / 2);
+  }
+
+  .col-1-of-3 {
+    width: calc((100% - 2 * #{$gutter-horizontal}) / 3);
+  }
+
+  .col-2-of-3 {
+    width: calc(2 * ((100% - 2 * #{$gutter-horizontal}) / 3) + #{$gutter-horizontal});
+  }
+
+  .col-1-of-4 {
+    width: calc((100% - 3 * #{$gutter-horizontal}) / 4);
+  }
+
+  .col-2-of-4 {
+    width: calc(2 * ((100% - 3 * #{$gutter-horizontal}) / 4) + #{$gutter-horizontal});
+  }
+
+  .col-3-of-4 {
+    width: calc(3 * ((100% - 3 * #{$gutter-horizontal}) / 4) + 2 * (#{$gutter-horizontal});
+  }
+}
+
+
+// notes:
+
+//   &:not(:last-child) {} ==> this :not will select everything except the ':last-child' element
+
+//   calc() - calculations where you can mix units (mix rem with px and %)
+//     to use scss variables with calc you have to wrap your var in 
+//     #{$gutter-horizonal}
+
+//  [class^="col-"] ==> select classes that start with 'col-'
+//      which in our case will select all of the columns because all start with 'col-'
